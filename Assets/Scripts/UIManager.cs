@@ -164,6 +164,16 @@ public class UIManager : MonoBehaviour
         _defeatMessage.SetActive(true);
     }
 
+    public void LogMove(Unit origin, MoveData move, List<Unit> targets)
+    {
+        string targetsString = targets[0].gameObject.name;
+        for (int i = 1; i < targets.Count; i++)
+        {
+            targetsString += ", " + targets[i].gameObject.name;
+        }
+        Debug.Log(origin.gameObject.name + " used " + move.MoveName + " on " + targetsString);
+    }
+
     public void HideSelector()
     {
         _unitSelector.SetActive(false);

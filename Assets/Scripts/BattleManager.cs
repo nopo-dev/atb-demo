@@ -55,6 +55,7 @@ public class BattleManager : MonoBehaviour
             {
                 MoveData move = unit.GetRandomMoveData();
                 List<Unit> targets = SelectRandomTargets(unit, move);
+                _uiManager.LogMove(unit, move, targets);
                 PerformEnemyMove(move, targets);
                 unit.ResetActionValue();
                 if (_playerUnits.Count == 0)
@@ -151,6 +152,7 @@ public class BattleManager : MonoBehaviour
                 break;
             case UIState.TargetSelect:
                 move = _playerUnits[_selectedUnit].GetMoveData(_uiManager.SelectedMove);
+                _uiManager.LogMove(_playerUnits[_selectedUnit], move, _currentTargets);
                 PerformMove(move);
                 _playerUnits[_selectedUnit].ResetActionValue();
                 _battleState = BattleState.Active;
